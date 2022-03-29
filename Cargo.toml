@@ -42,6 +42,46 @@ default = []
 ## [standard compliant]: https://www.w3.org/TR/xml11/#charencoding
 encoding = ["encoding_rs"]
 
+## This feature enables support of deserializing of lists which tags are overlapped
+## with tags that does not correspond to the list.
+##
+## When this feature is enabled, that XML:
+## ```xml
+## <any-name>
+##   <item/>
+##   <another-item/>
+##   <item/>
+##   <item/>
+## </any-name>
+## ```
+## could be deserialized to a struct:
+## ```ignore
+## #[derive(Deserialize)]
+## #[serde(rename_all = "kebab-case")]
+## struct AnyName {
+##   item: Vec<()>,
+##   another_item: (),
+## }
+## ```
+##
+## When feature is not enabled (default), only first element will be assotiated
+## with a field, and deserializer will report an error when it encounter a second
+## `<item/>`.
+##
+## Note, that enabling this feature can lead to high and even unlimited memory
+## consumption, because deserializer should check all events up to the end of a
+## container tag (`</any-name>` in that example) to figure out that there are no
+## more items for a field. If `</any-name>` or EOF even not encountered, the
+## parsing will never end which can lead to DoS.
+##
+## Having several lists and overlapped elements for them in XML could also lead
+## to quadratic parsing time, because deserialzier have to check list of events
+## as many times as count of sequence fields present.
+##
+## This feature works only with `serialize` feature and has no effect if `serialize`
+## is not enabled.
+overlapped-lists = []
+
 ## Enables support for [`serde`] serialization and deserialization
 serialize = ["serde"]
 
