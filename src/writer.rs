@@ -12,10 +12,10 @@ use events::Event;
 /// # Examples
 ///
 /// ```rust
-/// # extern crate quick_xml;
+/// # extern crate fast_xml;
 /// # fn main() {
-/// use quick_xml::{Reader, Writer};
-/// use quick_xml::events::{Event, BytesEnd, BytesStart};
+/// use fast_xml::{Reader, Writer};
+/// use fast_xml::events::{Event, BytesEnd, BytesStart};
 /// use std::io::Cursor;
 ///
 /// let xml = r#"<this_tag k1="v1" k2="v2"><child>text</child></this_tag>"#;

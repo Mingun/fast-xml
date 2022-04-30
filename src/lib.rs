@@ -10,8 +10,8 @@
 //! ### Reader
 //!
 //! ```rust
-//! use quick_xml::Reader;
-//! use quick_xml::events::Event;
+//! use fast_xml::Reader;
+//! use fast_xml::events::Event;
 //!
 //! let xml = r#"<tag1 att1 = "test">
 //!                 <tag2><!--Test comment-->Test</tag2>
@@ -58,9 +58,9 @@
 //! ### Writer
 //!
 //! ```rust
-//! use quick_xml::Writer;
-//! use quick_xml::events::{Event, BytesEnd, BytesStart};
-//! use quick_xml::Reader;
+//! use fast_xml::Writer;
+//! use fast_xml::events::{Event, BytesEnd, BytesStart};
+//! use fast_xml::Reader;
 //! use std::io::Cursor;
 //! use std::iter;
 //!
@@ -105,7 +105,7 @@
 //!
 //! # Features
 //!
-//! quick-xml supports 2 additional features, non activated by default:
+//! fast-xml supports 2 additional features, non activated by default:
 //! - `encoding`: support non utf8 xmls
 //! - `serialize`: support serde `Serialize`/`Deserialize`
 #![forbid(unsafe_code)]

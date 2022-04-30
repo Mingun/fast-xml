@@ -1,10 +1,10 @@
-extern crate quick_xml;
+extern crate fast_xml;
 #[cfg(feature = "serialize")]
 extern crate serde;
 
-use quick_xml::events::attributes::Attribute;
-use quick_xml::events::Event::*;
-use quick_xml::Reader;
+use fast_xml::events::attributes::Attribute;
+use fast_xml::events::Event::*;
+use fast_xml::Reader;
 use std::borrow::Cow;
 use std::io::Cursor;
 
@@ -357,7 +357,7 @@ fn fuzz_53() {
     let mut buf = vec![];
     loop {
         match reader.read_event(&mut buf) {
-            Ok(quick_xml::events::Event::Eof) | Err(..) => break,
+            Ok(fast_xml::events::Event::Eof) | Err(..) => break,
             _ => buf.clear(),
         }
     }
@@ -373,7 +373,7 @@ fn test_issue94() {
     let mut buf = vec![];
     loop {
         match reader.read_event(&mut buf) {
-            Ok(quick_xml::events::Event::Eof) | Err(..) => break,
+            Ok(fast_xml::events::Event::Eof) | Err(..) => break,
             _ => buf.clear(),
         }
         buf.clear();
@@ -494,7 +494,7 @@ fn line_score() {
         inning: String,
     }
 
-    let res: LineScoreData = quick_xml::de::from_str(include_str!("linescore.xml")).unwrap();
+    let res: LineScoreData = fast_xml::de::from_str(include_str!("linescore.xml")).unwrap();
 
     let expected = LineScoreData {
         game_pk: 239575,
@@ -606,7 +606,7 @@ fn players() {
         id: u32,
     }
 
-    let res: Game = quick_xml::de::from_str(include_str!("players.xml")).unwrap();
+    let res: Game = fast_xml::de::from_str(include_str!("players.xml")).unwrap();
 
     let expected = Game {
         teams: vec![

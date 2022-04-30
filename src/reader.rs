@@ -31,8 +31,8 @@ enum TagState {
 /// # Examples
 ///
 /// ```
-/// use quick_xml::Reader;
-/// use quick_xml::events::Event;
+/// use fast_xml::Reader;
+/// use fast_xml::events::Event;
 ///
 /// let xml = r#"<tag1 att1 = "test">
 ///                 <tag2><!--Test comment-->Test</tag2>
@@ -518,8 +518,8 @@ impl<B: BufRead> Reader<B> {
     /// # Examples
     ///
     /// ```
-    /// use quick_xml::Reader;
-    /// use quick_xml::events::Event;
+    /// use fast_xml::Reader;
+    /// use fast_xml::events::Event;
     ///
     /// let xml = r#"<tag1 att1 = "test">
     ///                 <tag2><!--Test comment-->Test</tag2>
@@ -597,8 +597,8 @@ impl<B: BufRead> Reader<B> {
     ///
     /// ```
     /// use std::str::from_utf8;
-    /// use quick_xml::Reader;
-    /// use quick_xml::events::Event;
+    /// use fast_xml::Reader;
+    /// use fast_xml::events::Event;
     ///
     /// let xml = r#"<x:tag1 xmlns:x="www.xxxx" xmlns:y="www.yyyy" att1 = "test">
     ///                 <y:tag2><!--Test comment-->Test</y:tag2>
@@ -814,8 +814,8 @@ impl<B: BufRead> Reader<B> {
     /// # Examples
     ///
     /// ```
-    /// use quick_xml::Reader;
-    /// use quick_xml::events::Event;
+    /// use fast_xml::Reader;
+    /// use fast_xml::events::Event;
     ///
     /// let mut xml = Reader::from_reader(b"
     ///     <a>&lt;b&gt;</a>
@@ -856,8 +856,8 @@ impl<B: BufRead> Reader<B> {
     ///
     /// ```
     /// use std::{str, io::Cursor};
-    /// use quick_xml::Reader;
-    /// use quick_xml::events::Event;
+    /// use fast_xml::Reader;
+    /// use fast_xml::events::Event;
     ///
     /// let xml = r#"<tag1 att1 = "test">
     ///                 <tag2><!--Test comment-->Test</tag2>
