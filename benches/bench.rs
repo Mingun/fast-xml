@@ -104,7 +104,7 @@ fn fast_xml_escaped(c: &mut Criterion) {
             loop {
                 match r.read_event(&mut buf) {
                     Ok(Event::Start(_)) | Ok(Event::Empty(_)) => count += 1,
-                    Ok(Event::Text(ref e)) => nbtxt += e.len(),
+                    Ok(Event::Text(ref e)) => nbtxt += e.unescaped().unwrap().len(),
                     Ok(Event::Eof) => break,
                     _ => (),
                 }
