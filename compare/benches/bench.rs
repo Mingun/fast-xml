@@ -1,6 +1,6 @@
 use criterion::{self, criterion_group, criterion_main, Criterion};
-use pretty_assertions::assert_eq;
 use fast_xml::{self, events::Event, Reader};
+use pretty_assertions::assert_eq;
 use serde::Deserialize;
 use serde_xml_rs;
 use xml::reader::{EventReader, XmlEvent};
@@ -26,6 +26,38 @@ fn low_level_comparison(c: &mut Criterion) {
                 buf.clear();
             }
             assert_eq!(count, 1550, "Overall tag count in ./tests/sample_rss.xml");
+        })
+    });
+
+    group.bench_function("xml5ever", |b| {
+        use xml5ever::buffer_queue::BufferQueue;
+        use xml5ever::tokenizer::{TagKind, Token, TokenSink, XmlTokenizer};
+
+        struct Sink(usize);
+        impl TokenSink for Sink {
+            fn process_token(&mut self, token: Token) {
+                match token {
+                    Token::TagToken(tag) if tag.kind == TagKind::StartTag => self.0 += 1,
+                    Token::TagToken(tag) if tag.kind == TagKind::EmptyTag => self.0 += 1,
+                    _ => (),
+                }
+            }
+        }
+
+        // Copied from xml5ever benchmarks
+        // https://github.com/servo/html5ever/blob/429f23943b24f739b78f4d703620d7b1b526475b/xml5ever/benches/xml5ever.rs
+        b.iter(|| {
+            let sink = criterion::black_box(Sink(0));
+            let mut tok = XmlTokenizer::new(sink, Default::default());
+            let mut buffer = BufferQueue::new();
+            buffer.push_back(SOURCE.into());
+            let _ = tok.feed(&mut buffer);
+            tok.end();
+
+            assert_eq!(
+                tok.sink.0, 1550,
+                "Overall tag count in ./tests/sample_rss.xml"
+            );
         })
     });
 
