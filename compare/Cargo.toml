@@ -18,6 +18,7 @@ rapid-xml = "0.2"
 serde-xml-rs = "0.5"
 serde = { version = "1.0", features = [ "derive" ] }
 pretty_assertions = "1.2"
+rusty_xml = { version = "0.3", package = "RustyXML" }
 
 [[bench]]
 name = "bench"
