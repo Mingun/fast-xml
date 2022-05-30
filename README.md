@@ -1,3 +1,4 @@
+# [quick-xml] returned back and active again. Please use it
 # fast-xml -- successor of [quick-xml]
 
 ![status](https://github.com/Mingun/fast-xml/actions/workflows/rust.yml/badge.svg)

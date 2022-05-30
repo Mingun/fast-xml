@@ -1,3 +1,6 @@
+//! Please use [quick-xml]. This project was born as its successor, but [quick-xml]
+//! raised again.
+//!
 //! High performance XML reader/writer.
 //!
 //! ## Description
@@ -7,7 +10,7 @@
 //! A streaming API based on the [StAX] model. This is suited for larger XML documents which
 //! cannot completely read into memory at once.
 //!
-//! The user has to expicitely _ask_ for the next XML event, similar
+//! The user has to explicitly _ask_ for the next XML event, similar
 //! to a database cursor.
 //! This is achieved by the following two structs:
 //!
@@ -125,6 +128,7 @@
 //!
 //! [StAX]: https://en.wikipedia.org/wiki/StAX
 //! [Serde]: https://serde.rs/
+//! [quick-xml]: https://github.com/tafia/quick-xml
 #![cfg_attr(
     feature = "document-features",
     cfg_attr(doc, doc = ::document_features::document_features!())
